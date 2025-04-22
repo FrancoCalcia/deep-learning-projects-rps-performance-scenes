@@ -98,3 +98,13 @@ python rock-paper-scissors.py
 
 La carpeta `dataset/` fue comprimida como `dataset.rar` para poder subirla a GitHub, ya que contiene muchas imágenes.  
 Descomprimí el archivo antes de entrenar el modelo para que `train-gesture-classifier.py` funcione correctamente.
+
+---
+
+## ⚠️ Nota técnica
+
+Durante el desarrollo del proyecto hubo varios problemas relacionados con la instalación de librerías, especialmente con **MediaPipe** y **TensorFlow**.  
+Después de probar diferentes configuraciones, se resolvieron los conflictos utilizando **Python 3.11.9**, que fue compatible con todas las dependencias sin errores de instalación ni ejecución.
+
+> 💡 Recomendación: si encontrás errores al instalar las librerías, probá crear un entorno virtual con Python 3.11.9.
+
