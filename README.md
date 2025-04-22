@@ -10,8 +10,8 @@ Se usa **MediaPipe** para detectar los puntos clave de la mano, y una **red neur
 
 ```
 rock-paper-scissors/
-├── capturas/                      # Carpeta para imágenes guardadas durante la predicción
-├── dataset.rar                    # 📦 Dataset comprimido (ver nota abajo)
+├── capturas/                     # Carpeta para imágenes guardadas durante la predicción
+├── dataset.rar                   # 📦 Dataset comprimido (ver nota abajo)
 ├── record-dataset.py             # Script para grabar gestos y construir el dataset
 ├── train-gesture-classifier.py   # Script para entrenar la red neuronal
 ├── rock-paper-scissors.py        # Script para predecir el gesto en tiempo real
