@@ -16,7 +16,7 @@ def scale_input(X):
 
 # 2. Inicializar MediaPipe Hands para detectar la mano en tiempo real
 mp_hands = mp.solutions.hands
-hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1)  # modo video, una sola mano
+hands = mp_hands.Hands(static_image_mode=False, max_num_hands=2)  # modo video, 2 manos
 mp_draw = mp.solutions.drawing_utils  # para dibujar los landmarks
 
 # 3. Lista de clases mapeadas según su índice
@@ -41,28 +41,29 @@ while True:
 
     # Si se detecta al menos una mano
     if result.multi_hand_landmarks:
-        for hand_landmarks in result.multi_hand_landmarks:
+        for i, hand_landmarks in enumerate(result.multi_hand_landmarks):
             coords = []
-
-            # Extraer coordenadas (x, y) de los 21 puntos de la mano
             for lm in hand_landmarks.landmark:
                 coords.append(lm.x)
                 coords.append(lm.y)
 
-            # Escalar los datos como durante el entrenamiento
-            X_input = scale_input(np.array(coords).reshape(1, -1))
+            if len(coords) == 42:
+                X_input = scale_input(np.array(coords).reshape(1, -1))
+                prediction = model.predict(X_input, verbose=0)
+                class_id = np.argmax(prediction)
+                prob = prediction[0][class_id]
+                label = f"{clases[class_id]} ({prob*100:.1f}%)"
 
-            # Realizar la predicción con el modelo
-            prediction = model.predict(X_input, verbose=0)
-            class_id = np.argmax(prediction)            # índice de la clase predicha
-            prob = prediction[0][class_id]              # probabilidad de la clase predicha
+                # Dibujar la mano
+                mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-            # Crear etiqueta con el nombre de la clase y su probabilidad
-            label = f"{clases[class_id]} ({prob*100:.1f}%)"
+                # Obtener posición base para ubicar el texto sobre cada mano
+                x = int(hand_landmarks.landmark[0].x * frame.shape[1])
+                y = int(hand_landmarks.landmark[0].y * frame.shape[0]) - 20
 
-            # Dibujar los landmarks de la mano y mostrar la predicción en pantalla
-            mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-            cv2.putText(frame, label, (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 3)
+                # Dibujar la etiqueta en la imagen cerca de la mano
+                cv2.putText(frame, label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 0), 2)
+
 
     # Mostrar el frame en una ventana
     cv2.imshow("Rock Paper Scissors", frame)
