@@ -103,9 +103,8 @@ Este proyecto implementa un modelo de regresión para predecir el índice de ren
 
 📊 **Instrucciones de uso:**
 
-1. Subir el archivo `academic_data.csv` o montar Google Drive desde Colab.
-2. Ejecutar el notebook (ejercicio 1) `AA2-TP1-Avecilla-Calcia-Rizzotto.ipynb`.
-3. El flujo incluye:
+1. Ejecutar el notebook (ejercicio 1) `AA2-TP1-Avecilla-Calcia-Rizzotto.ipynb`.
+2. El flujo incluye:
 
    * Análisis exploratorio de datos
    * Preprocesamiento (inclusión de variables categóricas)
@@ -134,7 +133,7 @@ scene-classification/
 * train/ → Carpeta con imágenes de entrenamiento
 * test/ → Carpeta con imágenes de test
 * prediction/ → Carpeta con imágenes sin etiqueta
-* cnn\_models.ipynb → Notebook con los modelos implementados
+* AA2-TP1-Avecilla-Calcia-Rizzotto.ipynb → Notebook con los modelos implementados
 * models/ → Carpeta opcional para guardar modelos entrenados
 
 🧱 **Modelos implementados:**
@@ -160,5 +159,3 @@ scene-classification/
 
 * Las imágenes deben tener tamaño 150x150.
 * Se utiliza `ImageDataGenerator` para cargar datos y aplicar aumentos.
-
-
